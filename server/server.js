@@ -22,13 +22,13 @@ io.on('connection', (socket) => {
 
     socket.on('createMessage', (newMessage) => {
         console.log('createMessage', newMessage);
+        io.emmit('newMessage', {
+            from: newMessage.from,
+            text: newMessage.text,
+            createdAt: new Date().getTime()
+        });
     });
 
-    socket.emit('newMessage', {
-        from: 'mike@example.com',
-        text: 'Hey, what\'s going on?',
-        createdAt: 123
-    } );
 });
 
 server.listen(port, () => {
